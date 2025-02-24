@@ -1,12 +1,21 @@
 import requests
 
-# response = requests.get("http://127.0.0.1:5000/" + "coffee")
+response = requests.get("http://127.0.0.1:5000" + "/api/farms/1")
+print(response.json())
+
+# response = requests.get("http://127.0.0.1:5000" + "/api/farms")
 # print(response.json())
-# input()
-response = requests.get("http://127.0.0.1:5000/" + "/api/farm")
-print(response.json())
-response = requests.post("http://127.0.0.1:5000/" + "/api/farm", {"location": "Panama", "name": "Finca Sophia", "description": "Small farm delivering high quality coffee"})
-print(response.json())
+# response = requests.post("http://127.0.0.1:5000" + "/api/farms", {"location": "Panama", "name": "Finca Sophia", 
+#                                                                    "description": "Small farm delivering high quality coffee"})
+# print(response.json())
+
+# response = requests.get("http://127.0.0.1:5000" + "/api/coffees")
+# print(response.json())
+# response = requests.post("http://127.0.0.1:5000" + "/api/coffees", {"farm_id": "1", "variety": "Geisha", 
+#                                                                    "process": "Washed",
+#                                                                    "descriptors": "Honey, Peach, Jasmine","image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR61YomAWMQci0v3lCiIaeGSgo0FFdY0pi4eA&s"})
+# print(response.json())
+
 # input()
 # response = requests.get("http://127.0.0.1:5000/" + "farm")
 # response = requests.post("http://127.0.0.1:5000/" + "coffee", {"farm_name":"Finca Sophia","variety": "Geisha", "process": "Washed", "descriptors": "Honey, Peach, Jasmine", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR61YomAWMQci0v3lCiIaeGSgo0FFdY0pi4eA&s"})

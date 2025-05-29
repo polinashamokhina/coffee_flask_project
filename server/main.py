@@ -1,11 +1,15 @@
 from flask import Flask, abort, request
 from flask_restful import Api, Resource, reqparse, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+import pprint
+
 
 app = Flask(__name__)
 api = Api(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5500", "http://127.0.0.1:5500"]}})
 db = SQLAlchemy(app)
 
 class FarmModel(db.Model):
@@ -14,6 +18,7 @@ class FarmModel(db.Model):
     name = db.Column(db.String(100), nullable = False, unique = True)
     location = db.Column(db.String(100), nullable = False)
     description = db.Column(db.String(100))
+    image = db.Column(db.String(100), nullable = False)
 
 class CoffeeModel(db.Model):
     __tablename__ = 'coffees'
@@ -39,7 +44,8 @@ farm_resource_fields = {
       'id': fields.Integer,
       'name': fields.String,
       'location': fields.String,
-      'description': fields.String
+      'description': fields.String,
+      'image': fields.String
 }
 
 class ApiFarmCollection(Resource):
@@ -57,7 +63,7 @@ class ApiFarmCollection(Resource):
             return () , 409
 
         farm = FarmModel(id = len(FarmModel.query.all())+1, location = args['location'],
-                         name = args['name'], description = args['description'])
+                         name = args['name'], description = args['description'], image = args['image'])
         
         db.session.add(farm)
         db.session.commit()
@@ -128,20 +134,22 @@ class ApiCoffeeIndex(Resource):
         result = CoffeeModel.query.get(index)
         return result, 200
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 api.add_resource(ApiFarmCollection,"/api/farms")
-api.add_resource(ApiFarmIndex,"/api/farms/{int:index}") # google that ERROOOOOOOOOOR 404, домашка
+api.add_resource(ApiFarmIndex,"/api/farms/<int:index>") 
 
 api.add_resource(ApiCoffeeCollection,"/api/coffees")
-api.add_resource(ApiCoffeeIndex,"/api/coffees/{int:index}") # google that а это работает ??? подстава от игоря
+api.add_resource(ApiCoffeeIndex,"/api/coffees/<int:index>") 
 
 
-farm_parse_args = reqparse.RequestParser()
-farm_parse_args.add_argument('name', type=str, help='provide the name of this farm', required=True, location='form')
-farm_parse_args.add_argument('location', type=str, help='provide the country name of this farm', required=True, location='form')
-farm_parse_args.add_argument('description', type=str, help='provide the country name of this farm',location='form')
+farm_parse_args = reqparse.RequestParser() # заменили form на json чтобы отправлять из JS
+farm_parse_args.add_argument('name', type=str, help='provide the name of this farm', required=True, location='json')
+farm_parse_args.add_argument('location', type=str, help='provide the country name of this farm', required=True, location='json')
+farm_parse_args.add_argument('description', type=str, help='provide the country name of this farm',location='json')
+farm_parse_args.add_argument('image', type=str, help='url adress of a photo',location='json')
+
 
 coffee_parse_args = reqparse.RequestParser()
 coffee_parse_args.add_argument('farm_id', type=int, help='shows connection of a coffee with a farm', required=True,location='form')

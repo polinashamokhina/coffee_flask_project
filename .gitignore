@@ -1,3 +1,2 @@
-venv/
-instance/
-main_backup.py
+server/venv/
+server/instance/

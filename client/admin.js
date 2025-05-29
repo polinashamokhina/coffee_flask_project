@@ -1,0 +1,62 @@
+const addFarmButton = document.querySelector("#addFarmBtn");
+const addCoffeeButton = document.querySelector("#addCoffeeBtn");
+
+const farmName = document.querySelector("#farmNameId");
+const farmLocation = document.querySelector("#farmLocationId");
+const farmDescription = document.querySelector("#farmDescriptionId");
+const farmImage = document.querySelector("#farmImageId");
+
+const coffeeFarmId = document.querySelector("#coffeeFarmId");
+const coffeeVariety = document.querySelector("#coffeeVarietyId");
+const coffeeProcess = document.querySelector("#coffeeProcessId");
+const coffeeDescriptors = document.querySelector("#coffeeDescriptorsId");
+const coffeeImage = document.querySelector("#coffeeImageId");
+
+const farmList = document.querySelector("#farmList"); 
+const coffeeList = document.querySelector("#coffeeList");// object and not an array
+
+addFarmButton.addEventListener("click", function(){
+    console.log(document.querySelector("#farmNameId").innerText) // ПУСТО ГДЕ НАЗНАЧЕНИЕ МЫ ЕГО НЕ ВИДИМ maybe we need smt else than innerText 
+    console.log(JSON.stringify({
+        name: farmName.innerText ,
+        location: farmLocation.innerText ,
+        description: farmDescription.innerText , 
+        image: farmImage.innerText
+    }));
+
+    fetch('http://127.0.0.1:5000/api/farms', {
+        method: 'POST',
+        body: JSON.stringify({
+            name: farmName.innerText ,
+            location: farmLocation.innerText ,
+            description: farmDescription.innerText , 
+            image: farmImage.innerText
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+            
+})
+
+addCoffeeButton.addEventListener("click", function(){
+
+    fetch('http://127.0.0.1:5000/api/coffees', {
+        method: 'POST',
+        body: JSON.stringify({
+            farm_id: coffeeFarmId.innerText ,
+            variety: coffeeVariety.innerText ,
+            process: coffeeProcess.innerText , 
+            descriptors: coffeeDescriptors.innerText , 
+            image: coffeeImage.innerText
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+            
+})

@@ -1,0 +1,71 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Заголовок */
+h1 {
+    color: #333;
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+/* Поле ввода и кнопка */
+#farmInput {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#addFarmBtn:hover {
+    background-color: #218838;
+}
+
+#addCoffeeBtn:hover {
+  background-color: #218838;
+}
+
+/* Список задач */
+.allCards {
+  display: flex;
+  gap: 20px;
+}
+.card {
+    background: #f1a7d9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.2s;
+    padding: 10px;
+  }
+
+  .card-farm {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .card-country {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .card-description {
+    font-size: 16px;
+    color: black;
+  }

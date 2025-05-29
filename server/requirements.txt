@@ -2,3 +2,4 @@ flask
 flask-restful
 requests
 flask_sqlalchemy
+flask-cors

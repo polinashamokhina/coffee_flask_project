@@ -134,8 +134,12 @@ class ApiCoffeeIndex(Resource):
         result = CoffeeModel.query.get(index)
         return result, 200
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
+    
+@app.teardown_appcontext # закрывает сессию при каждом сбое или выключении приложения 
+def shutdown_session(exception=None):
+    db.session.remove()
 
 api.add_resource(ApiFarmCollection,"/api/farms")
 api.add_resource(ApiFarmIndex,"/api/farms/<int:index>") 

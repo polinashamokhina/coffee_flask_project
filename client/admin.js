@@ -16,13 +16,6 @@ const farmList = document.querySelector("#farmList");
 const coffeeList = document.querySelector("#coffeeList");// object and not an array
 
 addFarmButton.addEventListener("click", function(){
-    console.log(document.querySelector("#farmNameId").innerText) // ПУСТО ГДЕ НАЗНАЧЕНИЕ МЫ ЕГО НЕ ВИДИМ maybe we need smt else than innerText 
-    console.log(JSON.stringify({
-        name: farmName.value ,
-        location: farmLocation.value ,
-        description: farmDescription.value , 
-        image: farmImage.value
-    }));
 
     fetch('http://127.0.0.1:5000/api/farms', {
         method: 'POST',

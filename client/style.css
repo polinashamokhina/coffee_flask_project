@@ -69,3 +69,21 @@ img {
     font-size: 16px;
     color: black;
   }
+
+  #farmTable {
+    border-collapse: collapse;
+    margin: 50px auto; /* centers the table */
+    width: 80%; /* you can adjust the width as needed */
+    table-layout: fixed; /* ensures equal column width */
+  }
+  
+  #farmTable th,
+  #farmTable td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+  
+  overflow: hidden;          /* Hides overflow */
+  text-overflow: ellipsis;   /* Adds "..." */
+  max-width: 200px;          /* Optional, controls max cell width */
+}

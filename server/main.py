@@ -121,10 +121,21 @@ class ApiFarmIndex(Resource):
     
     #@marshal_with(farm_resource_fields)
     def delete(self, index):
-        farm = FarmModel.query.get(index)
+        farm = db.session.get(FarmModel, index)
         db.session.delete(farm)
         db.session.commit()
         return (), 200
+    
+    @marshal_with(farm_resource_fields)
+    def put(self, index):
+        data = request.get_json()
+        farm = db.session.get(FarmModel, index)
+        farm.name = data['name']
+        farm.location = data['location']
+        farm.description = data['description']
+        farm.image = data['image']
+        db.session.commit()
+        return farm , 200
 
     
 class ApiCoffeeIndex(Resource):

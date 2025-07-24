@@ -27,7 +27,7 @@ class CoffeeModel(db.Model):
     variety = db.Column(db.String(100), nullable = False)
     process = db.Column(db.String(100), nullable = False)
     descriptors = db.Column(db.String(100), nullable = False)
-    image = db.Column(db.String(100), nullable = False)
+    image = db.Column(db.String(200), nullable = False)
     url_name = db.Column(db.String(100), nullable = False, unique = True)
 
 coffee_resource_fields = {
@@ -144,6 +144,12 @@ class ApiCoffeeIndex(Resource):
     def get(self, index):
         result = CoffeeModel.query.get(index)
         return result, 200
+    
+    def delete(self, index):
+        coffee = db.session.get(CoffeeModel, index)
+        db.session.delete(coffee)
+        db.session.commit()
+        return (), 200
 
 # with app.app_context():
 #     db.create_all()
@@ -167,12 +173,12 @@ farm_parse_args.add_argument('image', type=str, help='url adress of a photo',loc
 
 
 coffee_parse_args = reqparse.RequestParser()
-coffee_parse_args.add_argument('farm_id', type=int, help='shows connection of a coffee with a farm', required=True,location='form')
-coffee_parse_args.add_argument('variety', type=str, help='provide the variety of a coffee', required=True,location='form')
-coffee_parse_args.add_argument('process', type=str, help='provide the processing method',location='form')
-coffee_parse_args.add_argument('descriptors', type=str, help='gives taste descriptors of a coffee',location='form')
-coffee_parse_args.add_argument('image', type=str, help='url adress of a photo',location='form')
-coffee_parse_args.add_argument('url_name', type=str, help='url of a coffee ',location='form')
+coffee_parse_args.add_argument('farm_id', type=int, help='shows connection of a coffee with a farm', required=True,location='json')
+coffee_parse_args.add_argument('variety', type=str, help='provide the variety of a coffee', required=True,location='json')
+coffee_parse_args.add_argument('process', type=str, help='provide the processing method',location='json')
+coffee_parse_args.add_argument('descriptors', type=str, help='gives taste descriptors of a coffee',location='json')
+coffee_parse_args.add_argument('image', type=str, help='url adress of a photo',location='json')
+coffee_parse_args.add_argument('url_name', type=str, help='url of a coffee ',location='json')
      
 if __name__ == "__main__":
     app.run(debug = True)

@@ -9,12 +9,14 @@
 </head>
 <body>
     <h1>Add Elemnts to the Datatbase</h1>
+    <h3>Farms Input</h3>
     <div class="addFarm">
         <input type="text" class="farmInput" id="farmNameId" placeholder="Farm name" required>
         <input type="text" class="farmInput" id="farmLocationId" placeholder="Farm location" required>
         <input type="text" class="farmInput" id="farmDescriptionId" placeholder="Farm description" required>
         <input type="text" class="farmInput" id="farmImageId" placeholder="Image URL" required>
         <button id="addFarmBtn">Add a farm</button>
+        <h2>Farms Table</h2>
         <table id="farmTable">
             <tr>
               <th>Name</th>
@@ -25,6 +27,7 @@
             </tr>
           </table>
     </div>  
+    <h3>Coffees Input</h3>
     <div class="addCoffee">
         <input type="text" class="coffeeInput" id="coffeeFarmId"placeholder="Farm Id" required>
         <input type="text" class="coffeeInput" id="coffeeVarietyId" placeholder="Coffee Variety" required>
@@ -32,7 +35,16 @@
         <input type="text" class="coffeeInput" id="coffeeDescriptorsId" placeholder="Coffee Descriptors" required>
         <input type="text" class="coffeeInput" id="coffeeImageId" placeholder="Image URL" required>
         <button id="addCoffeeBtn">Add a coffee</button>
-        <ul id="coffeeList"></ul>
+        <h2>Coffees Table</h2>
+        <table id="coffeeTable">
+            <tr>
+              <th>Farm Id</th>
+              <th>Variety</th>
+              <th>Process</th>
+              <th>Descriptors</th>
+              <th>Image URL</th>
+            </tr>
+        </table>
     </div>  
 </body>
 </html>

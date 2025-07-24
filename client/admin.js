@@ -16,6 +16,90 @@ const farmList = document.querySelector("#farmList");
 const coffeeList = document.querySelector("#coffeeList");// object and not an array
 
 const farmTable = document.querySelector("#farmTable");
+const coffeeTable = document.querySelector("#coffeeTable");
+
+function build_coffees_table(coffees){
+    console.log(coffees);
+    for (const coffee of coffees){
+
+        let row = document.createElement("tr");
+
+        let farmIdData = document.createElement("td");
+        let inputFarmId = document.createElement("input");
+        inputFarmId.value = coffee.farm_id;
+        farmIdData.appendChild(inputFarmId);
+        row.appendChild(farmIdData);
+        coffeeTable.appendChild(row);
+
+        let varietyData = document.createElement("td");
+        let inputVariety = document.createElement("input");
+        inputVariety.value = coffee.variety;
+        varietyData.appendChild(inputVariety);
+        row.appendChild(varietyData);
+        coffeeTable.appendChild(row);
+
+        let processData = document.createElement("td");
+        let inputProcess = document.createElement("input");
+        inputProcess.value = coffee.process;
+        processData.appendChild(inputProcess);
+        row.appendChild(processData);
+        coffeeTable.appendChild(row);
+
+        let descriptorsData = document.createElement("td");
+        let inputDescriptors = document.createElement("input");
+        inputDescriptors.value = coffee.descriptors;
+        descriptorsData.appendChild(inputDescriptors);
+        row.appendChild(descriptorsData);
+        coffeeTable.appendChild(row);
+
+        let imageUrlData = document.createElement("td");
+        let inputImageUrl = document.createElement("input");
+        inputImageUrl.value = coffee.image;
+        imageUrlData.appendChild(inputImageUrl);
+        row.appendChild(imageUrlData);
+        coffeeTable.appendChild(row);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+        deleteButton.addEventListener("click", () => {
+            fetch('http://127.0.0.1:5000/api/coffees/' + coffee.id, {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+                })
+                .then(response => response.json())
+                .then(data => console.log(data)); 
+            });
+        
+        const updateButton = document.createElement("button");
+        updateButton.innerText = "Update Data";
+        updateButton.addEventListener("click", () => {
+            fetch('http://127.0.0.1:5000/api/farms/' + coffee.id, {
+                method: "PUT",
+                body: JSON.stringify({
+                    farm_id: inputFarmId.value ,
+                    variety: inputVariety.value ,
+                    process: inputProcess.value ,
+                    descriptors: inputDescriptors.value , 
+                    image: inputImageUrl.value
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+                })
+                .then(response => response.json())
+                .then(data => console.log(data)); 
+            });
+        
+        let actionData = document.createElement("td");
+        actionData.appendChild(deleteButton);
+        actionData.appendChild(updateButton);
+        row.appendChild(actionData);
+        coffeeTable.appendChild(row);
+    }
+
+}
 
 function build_farms_table(farms){
     console.log(farms);
@@ -124,6 +208,15 @@ window.onload = function (){
         })
         .then(response => response.json())
         .then(data => build_farms_table(data)); 
+
+    fetch('http://127.0.0.1:5000/api/coffees', {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+        .then(response => response.json())
+        .then(data => build_coffees_table(data)); 
 }
 
 addFarmButton.addEventListener("click", function(){

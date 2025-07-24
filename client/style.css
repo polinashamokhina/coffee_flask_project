@@ -8,8 +8,68 @@ body {
 }
 
 /* Заголовок */
+/* Specific heading sizes & effects */
 h1 {
-    color: #333;
+  font-size: 2.8em;
+  border-bottom: 2px solid #f78fb3;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.5em;
+  padding-left: 15px;
+}
+
+h2 {
+  font-size: 2em;
+  font-style: italic;
+}
+
+/* Input Styling with Rose Touch */
+.farmInput, .coffeeInput {
+  width: 160px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 2px solid #f8a5c2;
+  border-radius: 6px;
+  background-color: #fff0f5;
+  color: #c71585;
+  box-shadow: 0 1px 3px rgba(248, 165, 194, 0.2);
+  margin-right: 6px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus effect with rose glow */
+.farmInput:focus, .coffeeInput:focus {
+  border-color: #ff6fa1;
+  box-shadow: 0 0 8px rgba(255, 111, 161, 0.4);
+}
+
+/* Button Styling with Rose Background */
+#addFarmBtn, #addCoffeeBtn {
+  padding: 10px 16px;
+  background-color: #ff6fa1;
+  color: white;
+  border: 2px solid #f78fb3;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+}
+
+/* Hover and active states with deeper rose effect */
+#addFarmBtn:hover, #addCoffeeBtn:hover {
+  background-color: #e0558c;
+  box-shadow: 0 6px 12px rgba(255, 105, 180, 0.3);
+}
+
+#addFarmBtn:active, #addCoffeeBtn:active {
+  transform: scale(0.97);
+  background-color: #d63384;
 }
 
 img {
@@ -17,24 +77,6 @@ img {
   border-radius: 4px;
   padding: 5px;
   width: 150px;
-}
-
-/* Поле ввода и кнопка */
-#farmInput {
-    width: 60%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-}
-
-#addFarmBtn:hover {
-    background-color: #218838;
-}
-
-#addCoffeeBtn:hover {
-  background-color: #218838;
 }
 
 /* Список задач */
@@ -70,20 +112,72 @@ img {
     color: black;
   }
 
-  #farmTable {
-    border-collapse: collapse;
-    margin: 50px auto; /* centers the table */
-    width: 80%; /* you can adjust the width as needed */
-    table-layout: fixed; /* ensures equal column width */
-  }
-  
-  #farmTable th,
-  #farmTable td {
-  border: 1px solid #000;
-  padding: 8px;
+ /* General Table Styling */
+#farmTable, #coffeeTable {
+  width: 90%;
+  margin: 50px auto;
+  border-collapse: collapse;
+  margin-top: 5px; /* reduces space above table */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.2); /* light pink glow */
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+/* Header Styling */
+#farmTable thead, #coffeeTable thead {
+  background-color: #f78fb3; /* soft pink */
+  color: white;
+}
+
+/* Cells Styling */
+#farmTable th, #farmTable td,
+#coffeeTable th, #coffeeTable td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
   text-align: center;
-  
-  overflow: hidden;          /* Hides overflow */
-  text-overflow: ellipsis;   /* Adds "..." */
-  max-width: 200px;          /* Optional, controls max cell width */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+}
+
+/* Alternating row colors */
+#farmTable tbody tr:nth-child(even),
+#coffeeTable tbody tr:nth-child(even) {
+  background-color: #fff0f5; /* lavender blush (pinkish) */
+}
+
+/* Hover effect */
+#farmTable tbody tr:hover,
+#coffeeTable tbody tr:hover {
+  background-color: #ffe4ec;
+  transition: background-color 0.3s;
+}
+
+/* Input Styling Inside Table */
+#farmTable input, #coffeeTable input {
+  width: 90%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Button Styling Inside Table */
+#farmTable button, #coffeeTable button {
+  padding: 6px 12px;
+  background-color: #ff6fa1; /* pink button */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+#farmTable button:hover, #coffeeTable button:hover {
+  background-color: #e0558c;
 }
